@@ -1,0 +1,981 @@
+.ru-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* ── Drop zone ─────────────────────────────────────────── */
+
+.ru-zone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 24px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+  user-select: none;
+  outline: none;
+}
+
+.ru-zone:hover:not(.ru-zone--has-file),
+.ru-zone:focus-visible:not(.ru-zone--has-file) {
+  border-color: #0f766e;
+  background: #f0fdfa;
+}
+
+.ru-zone--dragover {
+  border-style: solid;
+  border-color: #0f766e;
+  background: #f0fdfa;
+}
+
+.ru-zone--has-file {
+  cursor: default;
+  border-style: solid;
+  border-color: #0f766e;
+  background: #f0fdfa;
+  padding: 18px 20px;
+}
+
+.ru-input {
+  display: none;
+}
+
+/* ── Empty state ───────────────────────────────────────── */
+
+.ru-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ru-cloud-icon {
+  width: 42px;
+  height: 42px;
+  color: #94a3b8;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.ru-zone:hover .ru-cloud-icon,
+.ru-cloud-icon--active {
+  color: #0f766e;
+  transform: translateY(-2px);
+}
+
+.ru-drop-title {
+  margin: 4px 0 0;
+  color: #334155;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ru-drop-sub {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.ru-browse {
+  color: #0f766e;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ru-formats {
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}
+
+/* ── File selected state ───────────────────────────────── */
+
+.ru-file-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.ru-file-icon {
+  width: 30px;
+  height: 30px;
+  color: #0f766e;
+  flex: 0 0 auto;
+}
+
+.ru-file-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ru-file-name {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ru-file-size {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.ru-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #b91c1c;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background 0.12s;
+}
+
+.ru-remove-btn:hover {
+  background: #fecaca;
+}
+
+/* ── Error banner ──────────────────────────────────────── */
+
+.ru-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+/* ── Upload button ─────────────────────────────────────── */
+
+.ru-upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0f766e 0%, #0891b2 100%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, filter 0.15s;
+  letter-spacing: -0.01em;
+}
+
+.ru-upload-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.ru-upload-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Previous resume ───────────────────────────────────── */
+
+.ru-prev-resume {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ru-prev-divider {
+  font-size: 12px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ru-prev-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  max-width: 100%;
+}
+
+.ru-prev-btn:hover {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+}
+
+.ru-prev-filename {
+  color: #6b7280;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+.ru-prev-score {
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Success state ─────────────────────────────────────── */
+
+.ru-success-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  background: #f0fdf4;
+}
+
+.ru-success-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ru-success-icon {
+  color: #166534;
+  flex: 0 0 auto;
+}
+
+.ru-success-title {
+  margin: 0;
+  color: #166534;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ru-success-file {
+  margin: 2px 0 0;
+  color: #15803d;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ru-word-count {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ru-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ru-sections-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0f766e;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ru-sections-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ru-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ru-again-btn {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border: 1.5px solid #166534;
+  border-radius: 8px;
+  background: transparent;
+  color: #166534;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.ru-again-btn:hover {
+  background: #dcfce7;
+}
+
+/* ── Job description input ── */
+.ru-jd-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 16px;
+}
+
+.ru-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.15s;
+  align-self: flex-start;
+}
+
+.ru-back-btn:hover {
+  color: #6366f1;
+}
+
+
+.ru-jd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ru-jd-label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ru-jd-mode-switch {
+  display: flex;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+  flex-shrink: 0;
+}
+
+.ru-jd-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  white-space: nowrap;
+}
+
+.ru-jd-mode-btn--active {
+  background: #fff;
+  color: #1f2937;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ru-url-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  font-size: 13px;
+  color: #1f2937;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.ru-url-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.ru-url-input::placeholder {
+  color: #9ca3af;
+}
+
+.ru-url-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── GitHub section (upload zone) ── */
+.ru-github-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1.5px dashed #e5e7eb;
+  margin-top: 4px;
+}
+
+.ru-github-optional-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  padding-top: 4px;
+}
+
+.ru-github-optional-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6366f1;
+  background: #ede9fe;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.ru-github-info-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: #6366f1;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.ru-github-info-toggle:hover {
+  text-decoration: underline;
+}
+
+.ru-github-info {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.6;
+  padding: 10px 12px;
+  background: #f5f3ff;
+  border: 1px solid #e0e7ff;
+  border-radius: 8px;
+}
+
+.ru-github-info strong {
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.ru-github-connected-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 10px;
+  background: #f0fdf4;
+  font-size: 13px;
+  color: #166534;
+  line-height: 1.5;
+}
+
+.ru-github-connected-badge strong {
+  font-weight: 700;
+}
+
+.ru-github-connect-link {
+  font-size: 13px;
+  color: #6366f1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ru-github-connect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  background: #1f2937;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  align-self: flex-start;
+}
+
+.ru-github-connect-btn:hover {
+  opacity: 0.85;
+}
+
+.ru-github-msg {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ru-github-msg--success { color: #16a34a; }
+.ru-github-msg--error   { color: #dc2626; }
+
+/* ── GitHub strip inside success card ── */
+.ru-github-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 12px;
+}
+
+.ru-github-strip--on {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #166534;
+  font-weight: 500;
+}
+
+.ru-github-strip--on strong {
+  font-weight: 700;
+}
+
+.ru-github-strip--off {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6366f1;
+  cursor: pointer;
+}
+
+.ru-github-strip--off:hover {
+  text-decoration: underline;
+}
+
+.ru-github-strip-msg {
+  color: #16a34a;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+/* ── GitHub username row ── */
+.ru-github-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  transition: border-color 0.15s;
+}
+
+.ru-github-row:focus-within {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.ru-github-icon {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.ru-github-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: #1f2937;
+  outline: none;
+  font-family: inherit;
+}
+
+.ru-github-input::placeholder {
+  color: #9ca3af;
+}
+
+/* ── GitHub enriched badge ── */
+.ru-github-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.ru-jd-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  font-size: 13px;
+  color: #1f2937;
+  line-height: 1.6;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.ru-jd-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.ru-jd-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.ru-analyze-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  align-self: flex-start;
+}
+
+.ru-analyze-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.ru-analyze-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── ATS results ── */
+.ru-results {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 16px;
+}
+
+.ru-results-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ru-score-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ru-score-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ru-score-guide-link {
+  font-size: 11px;
+  color: #6366f1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ru-score-guide-link:hover {
+  color: #4f46e5;
+}
+
+.ru-summary {
+  margin: 0;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.ru-skills-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.ru-skills-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ru-skills-heading {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ru-skills-heading--match { color: #166534; }
+.ru-skills-heading--miss  { color: #991b1b; }
+
+.ru-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ru-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ru-skill-badge--match {
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.ru-skill-badge--miss {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+.ru-qual-gaps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.ru-qual-gaps-heading {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ru-qual-gaps-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ru-qual-gap-badge {
+  font-size: 12px;
+  font-weight: 500;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 4px 10px;
+  line-height: 1.4;
+}
+
+.ru-results-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ru-prep-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.ru-prep-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ── Home mode tabs ── */
+
+.ru-home-mode-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 0 4px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 4px;
+}
+
+.ru-home-mode-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  background: #fff;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.ru-home-mode-btn:hover { background: #f9fafb; color: #374151; }
+
+.ru-home-mode-btn--active {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4338ca;
+}
+
+.ru-intel-wrap {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ru-intel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  padding: 9px 16px;
+  border: 1.5px dashed #a5b4fc;
+  border-radius: 9px;
+  background: #f5f3ff;
+  color: #4f46e5;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ru-intel-btn:hover {
+  background: #ede9fe;
+  border-color: #818cf8;
+}
+
+.ru-intel-desc {
+  font-size: 11.5px;
+  color: #9ca3af;
+  margin: 0;
+  text-align: center;
+  line-height: 1.5;
+  padding: 0 4px;
+}
+
+.ru-reset-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: #9ca3af;
+  cursor: pointer;
+  text-decoration: underline;
+  align-self: flex-start;
+}
+
+.ru-reset-link:hover {
+  color: #6b7280;
+}
